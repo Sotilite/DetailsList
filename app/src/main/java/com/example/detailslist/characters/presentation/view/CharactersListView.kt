@@ -1,5 +1,6 @@
 package com.example.detailslist.characters.presentation.view
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,17 +20,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.example.detailslist.CharacterDetails
+import com.example.detailslist.Characters
 import com.example.detailslist.characters.presentation.MockData
-import com.example.detailslist.characters.presentation.model.CharactersUiModel
+import com.example.detailslist.characters.presentation.model.CharacterUiModel
+import com.example.detailslist.navigation.Route
+import com.example.detailslist.navigation.TopLevelBackStack
 
 @Composable
-fun CharactersListScreen() {
+fun CharactersListView(topLevelBackStack: TopLevelBackStack<Route>) {
     val characters = remember { MockData.getCharacters() }
 
     LazyColumn {
         characters.forEach { character ->
             item(key = character.id) {
-                CharactersListItem(character)
+                CharactersListItem(
+                    character,
+                    onCharacterClick = {
+                        topLevelBackStack.add(CharacterDetails(character))
+                    }
+                )
             }
         }
     }
@@ -37,9 +47,10 @@ fun CharactersListScreen() {
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun CharactersListItem(character: CharactersUiModel) {
+fun CharactersListItem(character: CharacterUiModel, onCharacterClick: (CharacterUiModel) -> Unit) {
     Column(
         modifier = Modifier
+            .clickable { onCharacterClick(character) }
             .padding(horizontal = 16.dp)
             .padding(top = 8.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -52,9 +63,10 @@ fun CharactersListItem(character: CharactersUiModel) {
                     .fillMaxWidth(0.2f)
                     .clip(RoundedCornerShape(16.dp)),
                 contentScale = ContentScale.Fit,
-
             )
-            Column {
+            Column(
+                modifier = Modifier.padding(horizontal = 8.dp)
+            ) {
                 Text(
                     text = character.name,
                     style = MaterialTheme.typography.titleLarge
@@ -76,5 +88,5 @@ fun CharactersListItem(character: CharactersUiModel) {
 @Preview(showBackground = true)
 @Composable
 fun CharactersListPreview() {
-    CharactersListScreen()
+    CharactersListView(TopLevelBackStack(Characters))
 }

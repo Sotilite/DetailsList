@@ -2,7 +2,7 @@ package com.example.detailslist
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -10,31 +10,39 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
-import com.example.detailslist.characters.presentation.view.CharactersListScreen
+import com.example.detailslist.characters.presentation.model.CharacterUiModel
+import com.example.detailslist.characters.presentation.view.CharacterDetailsView
+import com.example.detailslist.characters.presentation.view.CharactersListView
 import com.example.detailslist.navigation.Route
 import com.example.detailslist.navigation.TopLevelBackStack
+import org.koin.java.KoinJavaComponent.inject
 
 interface TopLevelRoute : Route {
     val icon: ImageVector
 }
-data object Characters: TopLevelRoute {
-    override val icon = Icons.Default.Face
-}
+
 data object Episodes: TopLevelRoute {
+    override val icon = Icons.Default.Build
+}
+data object Characters: TopLevelRoute {
     override val icon = Icons.Default.Person
 }
 
+data class CharacterDetails(val character: CharacterUiModel) : Route
+
 @Composable
 fun MainScreen() {
-    val topLevelBackStack = remember { TopLevelBackStack<Route>(Characters) }
+    val topLevelBackStack by inject<TopLevelBackStack<Route>>(TopLevelBackStack::class.java)
+
     Scaffold(bottomBar = {
         NavigationBar {
-            listOf(Characters, Episodes).forEach { route ->
+            listOf(Episodes, Characters).forEach { route ->
                 NavigationBarItem(
                     icon = { Icon(route.icon, null) },
                     selected = topLevelBackStack.topLevelKey == route,
@@ -49,11 +57,28 @@ fun MainScreen() {
             backStack = topLevelBackStack.backStack,
             onBack = { topLevelBackStack.removeLast() },
             modifier = Modifier.padding(padding),
+            entryDecorators = listOf(
+                rememberSavedStateNavEntryDecorator(),
+                rememberViewModelStoreNavEntryDecorator()
+            ),
             entryProvider = entryProvider {
+                entry<Episodes> {
+                    EpisodesListView("Episodes view")
+                }
                 entry<Characters> {
-                    CharactersListScreen()
+                    CharactersListView(topLevelBackStack)
+                }
+                entry<CharacterDetails> {
+                    CharacterDetailsView(it.character)
                 }
             }
         )
     }
+}
+
+@Composable
+fun EpisodesListView(text: String) {
+    Text(
+        text = text
+    )
 }

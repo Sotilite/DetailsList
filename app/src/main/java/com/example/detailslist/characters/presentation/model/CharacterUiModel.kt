@@ -3,7 +3,7 @@ package com.example.detailslist.characters.presentation.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CharactersUiModel(
+data class CharacterUiModel(
     val id: String,
     val name: String,
     val status: String,
@@ -11,4 +11,5 @@ data class CharactersUiModel(
     val gender: String,
     val origin: String,
     val imageUrl: String?,
+    val info: String,
 )
