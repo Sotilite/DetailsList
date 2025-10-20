@@ -1,6 +1,7 @@
 package com.example.detailslist
 
 import android.app.Application
+import com.example.detailslist.di.characterFeatureModule
 import com.example.detailslist.di.mainModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -12,7 +13,7 @@ class App: Application() {
         startKoin {
             androidLogger()
             androidContext(this@App)
-            modules(mainModule)
+            modules(mainModule, characterFeatureModule)
         }
     }
 }

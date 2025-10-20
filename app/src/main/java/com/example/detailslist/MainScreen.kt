@@ -66,7 +66,7 @@ fun MainScreen() {
                     EpisodesListView("Episodes view")
                 }
                 entry<Characters> {
-                    CharactersListView(topLevelBackStack)
+                    CharactersListView()
                 }
                 entry<CharacterDetails> {
                     CharacterDetailsView(it.character)
