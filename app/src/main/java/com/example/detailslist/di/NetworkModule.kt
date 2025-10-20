@@ -1,5 +1,6 @@
 package com.example.detailslist.di
 
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -10,6 +11,7 @@ import retrofit2.converter.kotlinx.serialization.asConverterFactory
 val networkModule = module {
     single {
         OkHttpClient.Builder()
+            .addInterceptor(ChuckerInterceptor(get()))
             .build()
     }
 
