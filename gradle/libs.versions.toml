@@ -14,11 +14,11 @@ activityCompose = "1.11.0"
 composeBom = "2024.09.00"
 navigation3Ui = "1.0.0-alpha10"
 lifecycleViewmodelNavigation3 = "2.10.0-alpha04"
+ksp = "2.0.21-1.0.27"
 retrofit = "3.0.0"
 chucker = "4.2.0"
 kotlinSerialization = "2.2.0"
 kotlinxSerializationCore = "1.9.0"
-roomKtx = "2.8.2"
 
 [libraries]
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutCompose" }
@@ -50,7 +50,6 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 retrofit-serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization", version.ref = "retrofit" }
 chucker = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker" }
 chucker-no-op = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker" }
-androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

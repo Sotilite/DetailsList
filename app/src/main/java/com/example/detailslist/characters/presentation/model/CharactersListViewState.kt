@@ -1,6 +1,6 @@
 package com.example.detailslist.characters.presentation.model
 
-class CharactersListViewState(
+data class CharactersListViewState(
     val state: State = State.Loading,
 ) {
     sealed interface State {

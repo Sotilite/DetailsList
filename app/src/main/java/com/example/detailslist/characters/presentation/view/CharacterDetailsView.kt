@@ -131,7 +131,7 @@ fun CharacterDetailsContent(state: CharacterDetailsViewState, modifier: Modifier
             }
         )
         Text(
-            text = String.format("Краткая информация. %s", state.character.info),
+            text = String.format("Краткая информация. %s", "Бла-бла-бла"),
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.constrainAs(info) {
                 top.linkTo(image.bottom, 8.dp)

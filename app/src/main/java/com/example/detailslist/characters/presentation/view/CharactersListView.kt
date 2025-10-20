@@ -1,5 +1,7 @@
 package com.example.detailslist.characters.presentation.view
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,7 +15,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -22,18 +23,14 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.example.detailslist.CharacterDetails
-import com.example.detailslist.Characters
-import com.example.detailslist.characters.presentation.MockData
 import com.example.detailslist.characters.presentation.model.CharacterUiModel
 import com.example.detailslist.characters.presentation.model.CharactersListViewState
 import com.example.detailslist.characters.presentation.viewModel.CharactersListViewModel
-import com.example.detailslist.navigation.Route
-import com.example.detailslist.navigation.TopLevelBackStack
 import com.example.detailslist.uikit.FullScreenError
 import com.example.detailslist.uikit.FullscreenLoading
 import org.koin.androidx.compose.koinViewModel
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CharactersListView() {
     val viewModel = koinViewModel<CharactersListViewModel>()
@@ -42,7 +39,7 @@ fun CharactersListView() {
     CharactersListViewContent(
         state.state,
         viewModel::onCharacterClick,
-        //viewModel::onRetryClick,
+        viewModel::onRetryClick,
     )
 }
 
@@ -116,6 +113,7 @@ fun CharactersListItem(character: CharacterUiModel, onCharacterClick: (Character
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun CharactersListPreview() {
