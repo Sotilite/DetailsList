@@ -1,5 +1,7 @@
 package com.example.detailslist
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
@@ -36,6 +38,7 @@ data object Characters: TopLevelRoute {
 
 data class CharacterDetails(val character: CharacterUiModel) : Route
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainScreen() {
     val topLevelBackStack by inject<TopLevelBackStack<Route>>(TopLevelBackStack::class.java)
@@ -66,7 +69,7 @@ fun MainScreen() {
                     EpisodesListView("Episodes view")
                 }
                 entry<Characters> {
-                    CharactersListView(topLevelBackStack)
+                    CharactersListView()
                 }
                 entry<CharacterDetails> {
                     CharacterDetailsView(it.character)

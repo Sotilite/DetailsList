@@ -1,10 +1,9 @@
-package com.example.detailslist.characters.presentation.model
+package com.example.detailslist.characters.domain.model
 
 import com.example.detailslist.characters.data.model.Location
-import kotlinx.serialization.Serializable
+import java.time.LocalDateTime
 
-@Serializable
-data class CharacterUiModel(
+class CharacterEntity(
     val id: String,
     val name: String,
     val status: String,
@@ -13,5 +12,5 @@ data class CharacterUiModel(
     val origin: String,
     val location: String,
     val imageUrl: String?,
-    val creationTime: String
+    val creationTime: LocalDateTime
 )

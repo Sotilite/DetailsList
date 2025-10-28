@@ -9,6 +9,4 @@ import org.koin.dsl.module
 
 val mainModule = module {
     single { TopLevelBackStack<Route>(Characters) }
-
-    viewModel { CharacterDetailsViewModel(get(), get()) }
 }
