@@ -1,8 +1,5 @@
 package com.example.detailslist.characters.domain.model
 
-import com.example.detailslist.characters.data.model.Location
-import java.time.LocalDateTime
-
 class CharacterEntity(
     val id: String,
     val name: String,
@@ -12,5 +9,5 @@ class CharacterEntity(
     val origin: String,
     val location: String,
     val imageUrl: String?,
-    val creationTime: LocalDateTime
+    val creationTime: String?
 )

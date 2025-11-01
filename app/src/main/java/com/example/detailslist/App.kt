@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.detailslist.di.characterFeatureModule
+import com.example.detailslist.di.dbModule
 import com.example.detailslist.di.mainModule
 import com.example.detailslist.di.networkModule
 import org.koin.android.ext.koin.androidContext
@@ -17,7 +18,7 @@ class App: Application() {
         startKoin {
             androidLogger()
             androidContext(this@App)
-            modules(mainModule, characterFeatureModule, networkModule)
+            modules(mainModule, characterFeatureModule, networkModule, dbModule)
         }
     }
 }

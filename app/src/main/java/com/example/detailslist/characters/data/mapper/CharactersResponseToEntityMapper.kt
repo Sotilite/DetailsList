@@ -4,8 +4,6 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.detailslist.characters.data.model.CharactersListResponse
 import com.example.detailslist.characters.domain.model.CharacterEntity
-import com.example.detailslist.core.orNow
-import com.example.detailslist.core.tryParseServerDate
 
 class CharactersResponseToEntityMapper {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -20,7 +18,7 @@ class CharactersResponseToEntityMapper {
                 origin = res.origin?.name.orEmpty(),
                 location = res.location?.name.orEmpty(),
                 imageUrl = res.image,
-                creationTime = tryParseServerDate(res.created).orNow(),
+                creationTime = res.created,
             )
         }.orEmpty()
     }

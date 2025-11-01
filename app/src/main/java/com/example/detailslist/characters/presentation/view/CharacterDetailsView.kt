@@ -1,5 +1,7 @@
 package com.example.detailslist.characters.presentation.view
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -10,8 +12,12 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -33,6 +39,7 @@ import com.example.detailslist.uikit.Spacing
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CharacterDetailsView(character: CharacterUiModel) {
@@ -55,6 +62,16 @@ fun CharacterDetailsView(character: CharacterUiModel) {
                             viewModel.onBack()
                         },
                     )
+                },
+                actions = {
+                    IconButton(
+                        onClick = { viewModel.onFavoriteChange() }
+                    ) {
+                        Icon(
+                            imageVector = state.favoriteIcon,
+                            contentDescription = null,
+                        )
+                    }
                 }
             )
         }
@@ -93,7 +110,7 @@ fun CharacterDetailsContent(state: CharacterDetailsViewState, modifier: Modifier
             model = state.character.imageUrl,
             contentDescription = null,
             modifier = Modifier
-                .size(350.dp, )
+                .size(350.dp,)
                 .clip(RoundedCornerShape(16.dp))
                 .padding(Spacing.mini)
         )

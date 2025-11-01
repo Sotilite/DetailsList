@@ -14,13 +14,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
+import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
 import com.example.detailslist.characters.presentation.model.CharacterUiModel
 import com.example.detailslist.characters.presentation.view.CharacterDetailsView
 import com.example.detailslist.characters.presentation.view.CharactersListView
+import com.example.detailslist.characters.presentation.view.CharactersSettingsDialog
 import com.example.detailslist.navigation.Route
 import com.example.detailslist.navigation.TopLevelBackStack
 import org.koin.java.KoinJavaComponent.inject
@@ -37,6 +40,8 @@ data object Characters: TopLevelRoute {
 }
 
 data class CharacterDetails(val character: CharacterUiModel) : Route
+
+data object CharactersSettings : Route
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -73,6 +78,11 @@ fun MainScreen() {
                 }
                 entry<CharacterDetails> {
                     CharacterDetailsView(it.character)
+                }
+                entry<CharactersSettings>(
+                    metadata = DialogSceneStrategy.dialog(DialogProperties())
+                ) {
+                    CharactersSettingsDialog()
                 }
             }
         )

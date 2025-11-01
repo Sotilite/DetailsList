@@ -1,12 +1,31 @@
 package com.example.detailslist.di
 
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStoreFile
 import com.example.detailslist.Characters
-import com.example.detailslist.characters.presentation.viewModel.CharacterDetailsViewModel
+import com.example.detailslist.characters.data.cashe.BadgeCache
 import com.example.detailslist.navigation.TopLevelBackStack
 import com.example.detailslist.navigation.Route
-import org.koin.core.module.dsl.viewModel
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val mainModule = module {
-    single { TopLevelBackStack<Route>(Characters) }
+    single {
+        TopLevelBackStack<Route>(Characters)
+    }
+    single {
+        getDataStore(androidContext())
+    }
+    single {
+        BadgeCache()
+    }
+}
+
+fun getDataStore(androidContext: Context): DataStore<Preferences> {
+    return PreferenceDataStoreFactory.create {
+        androidContext.preferencesDataStoreFile("default")
+    }
 }
