@@ -2,9 +2,11 @@ package com.example.detailslist
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -26,6 +28,8 @@ import com.example.detailslist.characters.presentation.view.CharactersListView
 import com.example.detailslist.characters.presentation.view.CharactersSettingsDialog
 import com.example.detailslist.navigation.Route
 import com.example.detailslist.navigation.TopLevelBackStack
+import com.example.detailslist.profile.presentation.view.EditProfileView
+import com.example.detailslist.profile.presentation.view.ProfileView
 import org.koin.java.KoinJavaComponent.inject
 
 interface TopLevelRoute : Route {
@@ -43,6 +47,12 @@ data class CharacterDetails(val character: CharacterUiModel) : Route
 
 data object CharactersSettings : Route
 
+data object Profile : TopLevelRoute {
+    override val icon = Icons.Default.Face
+}
+
+data object EditProfile : Route
+
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainScreen() {
@@ -50,7 +60,7 @@ fun MainScreen() {
 
     Scaffold(bottomBar = {
         NavigationBar {
-            listOf(Episodes, Characters).forEach { route ->
+            listOf(Episodes, Characters, Profile).forEach { route ->
                 NavigationBarItem(
                     icon = { Icon(route.icon, null) },
                     selected = topLevelBackStack.topLevelKey == route,
@@ -83,6 +93,12 @@ fun MainScreen() {
                     metadata = DialogSceneStrategy.dialog(DialogProperties())
                 ) {
                     CharactersSettingsDialog()
+                }
+                entry<Profile> {
+                    ProfileView().Content(Modifier.fillMaxWidth())
+                }
+                entry<EditProfile> {
+                    EditProfileView().Content(Modifier.fillMaxWidth())
                 }
             }
         )

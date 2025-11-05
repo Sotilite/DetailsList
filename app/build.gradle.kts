@@ -1,9 +1,13 @@
+import com.google.protobuf.gradle.id
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.ksp)
+    id("com.google.protobuf") version "0.9.4"
+    id("kotlin-parcelize")
 }
 
 android {
@@ -40,6 +44,23 @@ android {
         compose = true
     }
 }
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.24.1"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                id("java") {
+                    option("lite")
+                }
+                id("kotlin") {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
 
 dependencies {
 
@@ -57,6 +78,10 @@ dependencies {
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.bundles.koin)
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
+    implementation(libs.modo.compose)
+    implementation(libs.protobuf.javalite)
+    implementation(libs.protobuf.kotlin.lite)
+    implementation(libs.androidx.compose.runtime)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
