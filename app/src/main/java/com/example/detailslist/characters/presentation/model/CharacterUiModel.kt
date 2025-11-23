@@ -1,6 +1,5 @@
 package com.example.detailslist.characters.presentation.model
 
-import com.example.detailslist.characters.data.model.Location
 import kotlinx.serialization.Serializable
 
 @Serializable

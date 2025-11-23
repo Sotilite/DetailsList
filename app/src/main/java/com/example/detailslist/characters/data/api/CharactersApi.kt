@@ -1,4 +1,4 @@
-package com.example.detailslist.characters.data
+package com.example.detailslist.characters.data.api
 
 import com.example.detailslist.characters.data.model.CharactersListResponse
 import retrofit2.http.GET
