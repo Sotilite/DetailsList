@@ -15,5 +15,5 @@ val profileModule = module {
     single<ProfileRepository> { ProfileRepository() }
 
     viewModel { ProfileViewModel(get()) }
-    viewModel { EditProfileViewModel(get()) }
+    viewModel { EditProfileViewModel(get(), get()) }
 }
