@@ -2,11 +2,9 @@ package com.example.detailslist
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -15,26 +13,24 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
+import com.example.core.navigation.EntryProviderInstaller
 import com.example.detailslist.characters.presentation.model.CharacterUiModel
 import com.example.detailslist.characters.presentation.view.CharacterDetailsView
 import com.example.detailslist.characters.presentation.view.CharactersListView
 import com.example.detailslist.characters.presentation.view.CharactersSettingsDialog
-import com.example.detailslist.navigation.Route
-import com.example.detailslist.navigation.TopLevelBackStack
-import com.example.detailslist.profile.presentation.view.EditProfileView
-import com.example.detailslist.profile.presentation.view.ProfileView
+import com.example.core.navigation.Route
+import com.example.core.navigation.TopLevelBackStack
+import com.example.core.navigation.TopLevelRoute
+import com.example.profile.di.PROFILE_QUALIFIER
+import com.example.profile.di.Profile
+import org.koin.core.qualifier.named
 import org.koin.java.KoinJavaComponent.inject
-
-interface TopLevelRoute : Route {
-    val icon: ImageVector
-}
 
 data object Episodes: TopLevelRoute {
     override val icon = Icons.Default.Build
@@ -47,16 +43,15 @@ data class CharacterDetails(val character: CharacterUiModel) : Route
 
 data object CharactersSettings : Route
 
-data object Profile : TopLevelRoute {
-    override val icon = Icons.Default.Face
-}
-
-data object EditProfile : Route
-
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainScreen() {
     val topLevelBackStack by inject<TopLevelBackStack<Route>>(TopLevelBackStack::class.java)
+
+    val profileEntryProvider by inject<EntryProviderInstaller>(
+        clazz = EntryProviderInstaller::class.java,
+        qualifier = named(PROFILE_QUALIFIER)
+    )
 
     Scaffold(bottomBar = {
         NavigationBar {
@@ -94,12 +89,7 @@ fun MainScreen() {
                 ) {
                     CharactersSettingsDialog()
                 }
-                entry<Profile> {
-                    ProfileView().Content(Modifier.fillMaxWidth())
-                }
-                entry<EditProfile> {
-                    EditProfileView().Content(Modifier.fillMaxWidth())
-                }
+                profileEntryProvider.let { builder -> this.builder() }
             }
         )
     }

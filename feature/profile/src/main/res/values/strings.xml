@@ -1,0 +1,13 @@
+<resources>
+    <string name="profile">Профиль</string>
+    <string name="edit_profile">Редактирование</string>
+    <string name="resume">Резюме</string>
+    <string name="name">Имя</string>
+    <string name="link">Ссылка</string>
+    <string name="camera">Камера</string>
+    <string name="gallery">Галерея</string>
+    <string name="notification_channel_id">notification_channel</string>
+    <string name="notification_channel_name">Напоминание</string>
+    <string name="notification_label">Время любимой пары</string>
+    <string name="time_format">HH:mm</string>
+</resources>

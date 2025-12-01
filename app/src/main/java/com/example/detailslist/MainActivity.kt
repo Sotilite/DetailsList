@@ -6,16 +6,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.app.NotificationManagerCompat
-import com.example.detailslist.profile.presentation.notifications.NotificationChannelManager
-import com.example.detailslist.ui.theme.DetailsListTheme
+import com.example.profile.presentation.notifications.NotificationChannelManager
+import com.example.uikit.theme.DetailsListTheme
 
 class MainActivity : ComponentActivity() {
     private val channelManager : NotificationChannelManager by lazy {

@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <receiver
-            android:name=".profile.presentation.notifications.NotificationsReceiver"
+            android:name="com.example.profile.presentation.notifications.NotificationsReceiver"
             android:enabled="true"
             android:exported="false" />
 

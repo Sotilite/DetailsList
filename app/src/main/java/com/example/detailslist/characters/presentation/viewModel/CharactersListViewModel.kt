@@ -12,9 +12,9 @@ import com.example.detailslist.characters.domain.model.CharacterEntity
 import com.example.detailslist.characters.presentation.model.CharacterUiModel
 import com.example.detailslist.characters.presentation.model.CharactersListFilter
 import com.example.detailslist.characters.presentation.model.CharactersListViewState
-import com.example.detailslist.core.launchLoadingAndError
-import com.example.detailslist.navigation.Route
-import com.example.detailslist.navigation.TopLevelBackStack
+import com.example.core.utils.launchLoadingAndError
+import com.example.core.navigation.Route
+import com.example.core.navigation.TopLevelBackStack
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
