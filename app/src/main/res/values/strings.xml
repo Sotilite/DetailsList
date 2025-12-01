@@ -8,4 +8,6 @@
     <string name="link">Ссылка</string>
     <string name="camera">Камера</string>
     <string name="gallery">Галерея</string>
+    <string name="notification_channel_id">notification_channel</string>
+    <string name="notification_channel_name">Напоминание</string>
 </resources>

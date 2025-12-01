@@ -7,8 +7,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.example.detailslist.Characters
 import com.example.detailslist.characters.data.cashe.BadgeCache
-import com.example.detailslist.navigation.TopLevelBackStack
-import com.example.detailslist.navigation.Route
+import com.example.core.navigation.TopLevelBackStack
+import com.example.core.navigation.Route
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 

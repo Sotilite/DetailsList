@@ -7,7 +7,7 @@ import com.example.detailslist.di.characterFeatureModule
 import com.example.detailslist.di.dbModule
 import com.example.detailslist.di.mainModule
 import com.example.detailslist.di.networkModule
-import com.example.detailslist.di.profileModule
+import com.example.profile.di.profileModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin

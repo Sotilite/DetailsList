@@ -23,7 +23,7 @@ import com.example.detailslist.characters.presentation.model.CharactersSettingsS
 import com.example.detailslist.characters.presentation.viewModel.CharactersSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 import androidx.compose.ui.window.Dialog
-import com.example.detailslist.uikit.Spacing
+import com.example.uikit.component.Spacing
 
 @Composable
 fun CharactersSettingsDialog() {
