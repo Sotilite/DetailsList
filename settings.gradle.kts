@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "DetailsList"
 include(":app")
- 
+include(":uikit")
+include(":core")
+include(":feature:profile")

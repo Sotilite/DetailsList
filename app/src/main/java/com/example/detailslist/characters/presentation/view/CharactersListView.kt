@@ -46,9 +46,9 @@ import com.example.detailslist.characters.presentation.model.CharacterUiModel
 import com.example.detailslist.characters.presentation.model.CharactersListFilter
 import com.example.detailslist.characters.presentation.model.CharactersListViewState
 import com.example.detailslist.characters.presentation.viewModel.CharactersListViewModel
-import com.example.detailslist.uikit.FullScreenError
-import com.example.detailslist.uikit.FullscreenLoading
-import com.example.detailslist.uikit.Spacing
+import com.example.uikit.component.FullScreenError
+import com.example.uikit.component.FullscreenLoading
+import com.example.uikit.component.Spacing
 import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
